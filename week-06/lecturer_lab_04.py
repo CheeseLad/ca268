@@ -76,9 +76,9 @@ for char in input_formula:
         b = empty_stack.pop()
         a = empty_stack.pop()
 
-        c = {"+": a + b, "-": a - b, "*": a * b, "/": a / b, "^": a ** b}[char]
-        empty_stack.push(c)
-    print(empty_stack.items)
+        dict_operations = {"+": a + b, "-": a - b, "*": a * b, "/": a / b, "^": a ** b}[char]
+        empty_stack.push(dict_operations)
+print(empty_stack.items)
 
 # Time complexity: the "in" operator checks a small amount in list (not worth adding to time complexity)
 
