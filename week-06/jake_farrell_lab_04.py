@@ -27,18 +27,53 @@ class Queue:
         else:
             new.append("test")
             return
+
     def reverse_first(self, k):
         self.items = self.items[k::-1]
 
-if __name__ == '__main__':
-    q = Queue()
-    q.enqueue(1)
-    q.enqueue(2)
-    q.enqueue(3)
-    print(q.items)
-    q.reverse_first(1)
-    print(q.items)
+    def front(self):
+        return self.items[0]
 
+# Q1
+
+def FrontToLast(q, queue_size):
+    if queue_size <=0:
+        return
+    q.enqueue(q.dequeue())
+    FrontToLast(q, queue_size - 1)
+
+def PushInQueue(q, temp, queue_size):
+    if q.is_empty() or queue_size == 0:
+        q.enqueue(temp)
+        return
+    elif temp <= q.front():
+        q.enqueue(temp)
+        FrontToLast(q, queue_size)
+    else:
+        q.enqueue(q.dequeue())
+        PushInQueue(q, temp, queue_size - 1)
+
+def sortQueue(q):
+    if q.is_empty():
+        return
+    temp = q.dequeue()
+    sortQueue(q)
+    PushInQueue(q, temp, q.size())
+
+qu = Queue()
+ 
+qu.enqueue(10) 
+qu.enqueue(7) 
+qu.enqueue(16) 
+qu.enqueue(9) 
+qu.enqueue(20) 
+qu.enqueue(5)
+ 
+sortQueue(qu)
+ 
+while not qu.is_empty(): 
+    print(qu.dequeue(), end = ' ') 
+print()
 def q2(n):
     q2_q = Queue()
     for i in range(1, n + 1):
